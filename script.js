@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // (Los navegadores requieren una interacción previa)
         const startAudio = () => {
             if (globalAudio.paused) {
-                globalAudio.volume = 0.4; // Volumen de bienvenida
+                globalAudio.volume = 0.15; // Volumen de bienvenida sutil (15%)
                 globalAudio.play().catch(e => console.log("Audio play prevent:", e));
             }
         };
@@ -105,8 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Al hacer click en ENTRAR: bajar volumen significativamente y navegar
         enterBtn.addEventListener('click', () => {
-            // Bajamos el volumen al 15% como pidió el experto
-            globalAudio.volume = 0.15;
+            // Bajamos el volumen al 5% para que sea casi un susurro durante la lectura
+            globalAudio.volume = 0.05;
             
             // Ocultar Overlay y restaurar scroll
             welcomeOverlay.classList.add('hidden');
