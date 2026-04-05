@@ -13,6 +13,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Pantalla de Bienvenida Musical -->
+    <div id="welcome-overlay" class="welcome-overlay">
+        <div class="welcome-content text-center">
+            <img src="logo_foximports_hd.png" alt="Fox Imports Logo" class="welcome-logo pulse-gold">
+            <h1 class="gold-text-gradient mt-2" style="font-size: 2rem;">El Lujo Árabe en tu Piel</h1>
+            <p style="margin-bottom: 2rem; color: #ccc;">Tocá cualquier parte para activar la música árabe<br>Ingresá para vivir la experiencia sensorial</p>
+            <button id="enter-btn" class="btn btn-gold-solid btn-huge">ENTRAR A FOX IMPORTS</button>
+        </div>
+    </div>
+
+    <!-- Etiqueta de audio oculta global -->
+    <audio id="global-audio-track" loop>
+        <source src="ambient.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="ambient-background"></div>
 
@@ -33,7 +47,7 @@
                 </ul>
             </nav>
 
-            <a href="https://wa.me/541123703073?text=Hola%20Fox%20Imports!%20Busco%20la%20exclusividad.%20Me%20gustar%C3%ADa%20recibir%20asesoramiento%20VIP%20para%20encontrar%20mi%20pr%C3%B3xima%20fragancia." target="_blank" class="nav-btn btn-pill-animated desktop-only"><span>Contactar VIP</span></a>
+            <a href="https://wa.me/541123703073?text=Hola%20Fox%20Imports!%20Busco%20la%20exclusividad.%20Me%20gustar%C3%ADa%20recibir%20asesoramiento%20VIP%20para%20encontrar%20mi%20pr%C3%B3xima%20fragancia." target="_blank" class="nav-btn btn-pill-animated desktop-only"><span>Contactar</span></a>
 
             <!-- Mobile Menu Toggle (Cambiado a <button> para soporte nativo iOS/Android) -->
             <button class="menu-toggle" id="mobile-menu-btn" aria-label="Abrir Menú">
@@ -43,7 +57,7 @@
     </header>
 
     <!-- 1. HERO -->
-    <section class="hero relative-section z-index-1">
+    <section id="inicio" class="hero relative-section z-index-1">
         <div class="hero-content fade-up text-center">
             <div class="subtitle-badge">IMPORTADORES DIRECTOS</div>
             <h1 class="gold-text-gradient">La Exclusividad<br>Hecha Fragancia</h1>
@@ -159,6 +173,34 @@
                         </div>
                     </div>
                 </div>
+                <!-- Foto 5: Al Haramain Amber Oud Gold (NUEVA) -->
+                <div class="ig-img-wrapper tilt-card">
+                    <img src="Gemini_Generated_Image_pfe5f5pfe5f5pfe5.png" alt="Al Haramain Amber Oud Gold">
+                    <div class="ig-hover-overlay">
+                        <div class="overlay-scroll-container">
+                            <div class="overlay-content">
+                                <i class="fas fa-sun gold-text"></i>
+                                <h4>Amber Oud Gold</h4>
+                                <p>Opulencia líquida. Notas de melón y piña envueltas en un ámbar profundo. La joya dorada de Al Haramain para quien no acepta menos que el oro.</p>
+                                <a href="https://www.instagram.com/foximports25/" target="_blank" class="btn-min" style="display:inline-block; margin-top:5px;">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Foto 6: Lattafa Khamrah Qahwa (NUEVA) -->
+                <div class="ig-img-wrapper tilt-card">
+                    <img src="Gemini_Generated_Image_pfe5f5pfe5f5pfe5 (1).png" alt="Lattafa Khamrah Qahwa">
+                    <div class="ig-hover-overlay">
+                        <div class="overlay-scroll-container">
+                            <div class="overlay-content">
+                                <i class="fas fa-coffee gold-text"></i>
+                                <h4>Khamrah Qahwa</h4>
+                                <p>Seducción intensa. Un festín gourmand donde el café arábigo se encuentra con el praliné y especias cálidas. Intenso, nocturno y magnético.</p>
+                                <a href="https://www.instagram.com/foximports25/" target="_blank" class="btn-min" style="display:inline-block; margin-top:5px;">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <a href="https://www.instagram.com/foximports25/" target="_blank" class="btn btn-outline gold-outline mt-4 fade-up">
                 <i class="fab fa-instagram"></i> Explorar Catálogo Completo
@@ -166,47 +208,38 @@
         </div>
     </section>
 
-    <!-- 4. VIDEOS - TESTIMONIOS VIP -->
-    <section id="experiencia-vip" class="videos-section padding-y relative-section z-index-1 bg-gradient">
+    <!-- 4. ENCUENTRA TU FRAGANCIA (INFO CARDS) -->
+    <section id="experiencia-vip" class="discovery-section padding-y relative-section z-index-1 bg-gradient">
         <div class="container text-center">
-            <h2 class="section-title text-white fade-up">Ellos ya dejaron su <span class="gold-text-gradient">Marca</span></h2>
-            <p class="section-subtitle fade-up">Figuras reconocidas del espectáculo, artistas y personalidades confían en nuestro criterio para elegir el aroma que los define ante el público.</p>
+            <h2 class="section-title text-white fade-up">Encontrá la fragancia <span class="gold-text-gradient">para vos</span></h2>
+            <p class="section-subtitle fade-up">Explora el enigma y la seducción de una cultura perfumística inigualable.</p>
             
-            <div class="video-grid mt-4">
-                <!-- Video Placeholder 1 -->
-                <div class="video-card fade-up">
-                    <div class="video-placeholder">
-                        <div class="play-btn-circle"><i class="fas fa-play"></i></div>
-                        <div class="video-overlay"></div>
-                    </div>
-                    <div class="video-info">
-                        <h4>"El aroma que elijo para mis shows"</h4>
-                        <p class="text-light">Artista Exclusivo / VIP Client</p>
-                    </div>
+            <div class="discovery-grid mt-4">
+                <!-- Info Card 1 -->
+                <div class="glass-card tilt-card fade-up discovery-card">
+                    <div class="card-icon"><i class="fas fa-hand-sparkles"></i></div>
+                    <h3 class="gold-text">El Arte de Elegir</h3>
+                    <p class="text-light text-left mt-2">
+                        Encontrar tu firma olfativa no se trata de emparejar marcas, sino de conectar con tu esencia. Las fragancias precisan ser probadas en la piel, dejando que sus notas de corazón y maderas evolucionen y revelen en horas la auténtica personalidad que te define frente al resto.
+                    </p>
                 </div>
 
-                <!-- Video Placeholder 2 -->
-                <div class="video-card fade-up" style="transition-delay: 200ms;">
-                    <div class="video-placeholder">
-                        <div class="play-btn-circle"><i class="fas fa-play"></i></div>
-                        <div class="video-overlay"></div>
-                    </div>
-                    <div class="video-info">
-                        <h4>"Encontré la exclusividad que buscaba"</h4>
-                        <p class="text-light">Influencer Reconocido</p>
-                    </div>
+                <!-- Info Card 2 -->
+                <div class="glass-card tilt-card fade-up discovery-card" style="transition-delay: 200ms;">
+                    <div class="card-icon"><i class="fas fa-gem"></i></div>
+                    <h3 class="gold-text">El Privilegio Oriental</h3>
+                    <p class="text-light text-left mt-2">
+                        El cuidado y estatus de la perfumería en Medio Oriente roza lo sagrado. Es un ritual que exuda lujo absoluto a través de aceites esenciales hiper concentrados purísimos, garantizando una duración y proyección (estela) abrumadora que ninguna fórmula acuosa rebajada de diseñador podría igualar jamás.
+                    </p>
                 </div>
 
-                <!-- Video Placeholder 3 -->
-                <div class="video-card fade-up" style="transition-delay: 400ms;">
-                    <div class="video-placeholder">
-                        <div class="play-btn-circle"><i class="fas fa-play"></i></div>
-                        <div class="video-overlay"></div>
-                    </div>
-                    <div class="video-info">
-                        <h4>"Calidad incomparable, importado directo"</h4>
-                        <p class="text-light">Figura del Espectáculo</p>
-                    </div>
+                <!-- Info Card 3 -->
+                <div class="glass-card tilt-card fade-up discovery-card" style="transition-delay: 400ms;">
+                    <div class="card-icon"><i class="fas fa-globe"></i></div>
+                    <h3 class="gold-text">El Tesoro Oculto</h3>
+                    <p class="text-light text-left mt-2">
+                        Es el secreto mejor guardado del rubro. Mientras gran parte de Occidente consume fragancias comerciales y predecibles, en Oriente reside el alma de la perfumería: una colección exótica y opulenta reservada para quienes buscan proyectar una distinción inalcanzable. Es el aroma de la herencia real, diseñado para quienes no solo desean ser notados, sino recordados como una presencia imborrable.
+                    </p>
                 </div>
             </div>
         </div>

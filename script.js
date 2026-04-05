@@ -82,4 +82,42 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // 5. Bienvenida Musical y Reproducción de Foco Global
+    const welcomeOverlay = document.getElementById('welcome-overlay');
+    const enterBtn = document.getElementById('enter-btn');
+    const globalAudio = document.getElementById('global-audio-track');
+    
+    if (welcomeOverlay && enterBtn && globalAudio) {
+        // Bloquear scroll de la página mientras el welcome overlay está activo
+        document.body.style.overflow = 'hidden';
+
+        // 1. Iniciar audio al primer contacto con la pantalla de bienvenida
+        // (Los navegadores requieren una interacción previa)
+        const startAudio = () => {
+            if (globalAudio.paused) {
+                globalAudio.volume = 0.4; // Volumen de bienvenida
+                globalAudio.play().catch(e => console.log("Audio play prevent:", e));
+            }
+        };
+
+        // Escuchar click en cualquier parte del overlay para iniciar música
+        welcomeOverlay.addEventListener('click', startAudio);
+        
+        // Al hacer click en ENTRAR: bajar volumen significativamente y navegar
+        enterBtn.addEventListener('click', () => {
+            // Bajamos el volumen al 15% como pidió el experto
+            globalAudio.volume = 0.15;
+            
+            // Ocultar Overlay y restaurar scroll
+            welcomeOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+
+            // Llevar al inicio (Hero)
+            const inicioSection = document.getElementById('inicio');
+            if (inicioSection) {
+                inicioSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+
 });
