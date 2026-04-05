@@ -27,18 +27,18 @@
             <!-- Menú de navegación desktop y mobile -->
             <nav class="main-nav" id="main-nav-container">
                 <ul>
-                    <li><a href="#beneficios">Beneficios</a></li>
-                    <li><a href="#coleccion">Colección</a></li>
-                    <li><a href="#experiencia-vip">Experiencia VIP</a></li>
+                    <li><a href="#beneficios" class="nav-link">Beneficios</a></li>
+                    <li><a href="#coleccion" class="nav-link">Colección</a></li>
+                    <li><a href="#experiencia-vip" class="nav-link">Experiencia VIP</a></li>
                 </ul>
             </nav>
 
-            <a href="https://wa.me/541123703073?text=Hola%20Fox%20Imports!%20Busco%20la%20exclusividad.%20Me%20gustar%C3%ADa%20recibir%20asesoramiento%20VIP%20para%20encontrar%20mi%20pr%C3%B3xima%20fragancia." target="_blank" class="nav-btn btn-pill-animated"><span>Contactar VIP</span></a>
+            <a href="https://wa.me/541123703073?text=Hola%20Fox%20Imports!%20Busco%20la%20exclusividad.%20Me%20gustar%C3%ADa%20recibir%20asesoramiento%20VIP%20para%20encontrar%20mi%20pr%C3%B3xima%20fragancia." target="_blank" class="nav-btn btn-pill-animated desktop-only"><span>Contactar VIP</span></a>
 
-            <!-- Mobile Menu Toggle -->
-            <div class="menu-toggle" id="mobile-menu-btn">
+            <!-- Mobile Menu Toggle (Cambiado a <button> para soporte nativo iOS/Android) -->
+            <button class="menu-toggle" id="mobile-menu-btn" aria-label="Abrir Menú">
                 <i class="fas fa-bars"></i>
-            </div>
+            </button>
         </div>
     </header>
 
@@ -107,11 +107,13 @@
                 <div class="ig-img-wrapper tilt-card">
                     <img src="Captura de pantalla_5-4-2026_123148_www.instagram.com.jpeg" alt="Fox Imports Perfume 1">
                     <div class="ig-hover-overlay">
-                        <div class="overlay-content">
-                            <i class="fas fa-leaf gold-text"></i>
-                            <h4>Notas de Autor</h4>
-                            <p>Exclusividad en cada gota. Notas amaderadas intensas mezcladas con el misterio del Oud y especias orientales.</p>
-                            <span class="btn-min">Ver más</span>
+                        <div class="overlay-scroll-container">
+                            <div class="overlay-content">
+                                <i class="fas fa-leaf gold-text"></i>
+                                <h4>Notas de Autor</h4>
+                                <p>Exclusividad en cada gota. Notas amaderadas intensas mezcladas con el misterio del Oud y especias orientales.</p>
+                                <span class="btn-min">Ver más</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -119,11 +121,13 @@
                 <div class="ig-img-wrapper tilt-card">
                     <img src="Captura de pantalla_5-4-2026_123315_www.instagram.com.jpeg" alt="Fox Imports Perfume 2">
                     <div class="ig-hover-overlay">
-                        <div class="overlay-content">
-                            <i class="fas fa-crown gold-text"></i>
-                            <h4>Poder y Presencia</h4>
-                            <p>Un sello indiscutible. Fragancias diseñadas para proyectar autoridad, con estelas que superan las 12 horas en piel.</p>
-                            <span class="btn-min">Ver más</span>
+                        <div class="overlay-scroll-container">
+                            <div class="overlay-content">
+                                <i class="fas fa-crown gold-text"></i>
+                                <h4>Poder y Presencia</h4>
+                                <p>Un sello indiscutible. Fragancias diseñadas para proyectar autoridad, con estelas que superan las 12 horas en piel.</p>
+                                <span class="btn-min">Ver más</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -131,11 +135,13 @@
                 <div class="ig-img-wrapper tilt-card">
                     <img src="Captura de pantalla_5-4-2026_123436_www.instagram.com.jpeg" alt="Fox Imports Perfume 3">
                     <div class="ig-hover-overlay">
-                        <div class="overlay-content">
-                            <i class="fas fa-fire gold-text"></i>
-                            <h4>Atracción Magnética</h4>
-                            <p>Pura seducción. Acordes de vainilla negra entrelazados con toques de cuero ámbar, ideal para las noches de lujo.</p>
-                            <span class="btn-min">Ver más</span>
+                        <div class="overlay-scroll-container">
+                            <div class="overlay-content">
+                                <i class="fas fa-fire gold-text"></i>
+                                <h4>Atracción Magnética</h4>
+                                <p>Pura seducción. Acordes de vainilla negra entrelazados con toques de cuero ámbar, ideal para las noches de lujo.</p>
+                                <span class="btn-min">Ver más</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -143,11 +149,13 @@
                 <div class="ig-img-wrapper tilt-card">
                     <img src="Captura de pantalla_5-4-2026_123728_www.instagram.com.jpeg" alt="Fox Imports Perfume 4">
                     <div class="ig-hover-overlay">
-                        <div class="overlay-content">
-                            <i class="fas fa-gem gold-text"></i>
-                            <h4>Elegancia Árabe</h4>
-                            <p>Importación directa de Medio Oriente. Un perfil olfativo que las grandes marcas occidentales buscan imitar en vano.</p>
-                            <span class="btn-min">Ver más</span>
+                        <div class="overlay-scroll-container">
+                            <div class="overlay-content">
+                                <i class="fas fa-gem gold-text"></i>
+                                <h4>Elegancia Árabe</h4>
+                                <p>Importación directa de Medio Oriente. Un perfil olfativo que las grandes marcas occidentales buscan imitar en vano.</p>
+                                <span class="btn-min">Ver más</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -235,7 +243,6 @@
 
             <div class="footer-bottom">
                 <p>&copy; 2026 Fox Imports. Todos los derechos reservados.</p>
-                <!-- Dev Credits con fuente normal y alineados -->
                 <div class="dev-credits-container mt-2">
                     <p class="dev-standard-text">Sitio web desarrollado por <a href="https://wa.me/5491168983355" target="_blank" class="hover-white strong-link">Juan Colman</a></p>
                 </div>

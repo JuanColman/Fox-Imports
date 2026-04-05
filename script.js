@@ -33,23 +33,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 3. Inicializar Vanilla Tilt para las Tarjetas Glass (Efecto 3D VIP)
     if (typeof VanillaTilt !== "undefined") {
-        VanillaTilt.init(document.querySelectorAll(".tilt-card"), {
-            max: 5,        // Inclinación máxima en px
-            speed: 400,    // Velocidad de transición
-            glare: true,   // Agregar brillo de cristal
-            "max-glare": 0.15, // Opacidad máxima del brillo
-        });
+        // En móviles recomendamos deshabilitar el efecto tilt para evitar interferencia al tocar la pantalla.
+        // Se aplicará solo si el ancho de la pantalla es mayor a 768px (pantallas no táctiles generalmente).
+        const matchMedia = window.matchMedia("(min-width: 768px)");
+        if (matchMedia.matches) {
+            VanillaTilt.init(document.querySelectorAll(".tilt-card"), {
+                max: 5,        
+                speed: 400,    
+                glare: true,   
+                "max-glare": 0.15,
+            });
+        }
     }
 
-    // 4. Menu Hamburger para celulares
+    // 4. Menu Hamburger para celulares (Funcional para iOS/Android)
     const menuBtn = document.getElementById("mobile-menu-btn");
     const mainNav = document.getElementById("main-nav-container");
 
     if (menuBtn && mainNav) {
-        // Toggle (abrir/cerrar) al tocar las barras
-        menuBtn.addEventListener("click", () => {
+        
+        // Función principal toggle touch/click
+        const toggleMenu = (e) => {
+            e.preventDefault(); // Previene eventos fantasmas en iOS
             mainNav.classList.toggle("active");
-            // Animación del ícono
+            
             const icon = menuBtn.querySelector('i');
             if(mainNav.classList.contains("active")) {
                 icon.classList.remove('fa-bars');
@@ -58,10 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
             }
-        });
+        };
 
-        // Cerrar menú automáticamente al hacer click en los enlaces (Navegación limpia)
-        const navLinks = mainNav.querySelectorAll("a");
+        // Usar evento click estandar (mejor para elemento tipo button nativo conf igurado)
+        menuBtn.addEventListener("click", toggleMenu);
+
+        // Cerrar menú automáticamente al hacer click en los enlaces
+        const navLinks = mainNav.querySelectorAll("a.nav-link");
         navLinks.forEach(link => {
             link.addEventListener("click", () => {
                 mainNav.classList.remove("active");
