@@ -32,13 +32,43 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // 3. Inicializar Vanilla Tilt para las Tarjetas Glass (Efecto 3D VIP)
-    // El script de VanillaTilt se carga en HTML via CDN
     if (typeof VanillaTilt !== "undefined") {
         VanillaTilt.init(document.querySelectorAll(".tilt-card"), {
             max: 5,        // Inclinación máxima en px
             speed: 400,    // Velocidad de transición
             glare: true,   // Agregar brillo de cristal
             "max-glare": 0.15, // Opacidad máxima del brillo
+        });
+    }
+
+    // 4. Menu Hamburger para celulares
+    const menuBtn = document.getElementById("mobile-menu-btn");
+    const mainNav = document.getElementById("main-nav-container");
+
+    if (menuBtn && mainNav) {
+        // Toggle (abrir/cerrar) al tocar las barras
+        menuBtn.addEventListener("click", () => {
+            mainNav.classList.toggle("active");
+            // Animación del ícono
+            const icon = menuBtn.querySelector('i');
+            if(mainNav.classList.contains("active")) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Cerrar menú automáticamente al hacer click en los enlaces (Navegación limpia)
+        const navLinks = mainNav.querySelectorAll("a");
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                mainNav.classList.remove("active");
+                const icon = menuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
         });
     }
 

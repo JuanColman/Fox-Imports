@@ -20,47 +20,13 @@
     --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    background-color: var(--bg-dark);
-}
-
-body {
-    font-family: var(--font-text);
-    color: var(--text-main);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    line-height: 1.2;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-    transition: var(--transition);
-}
-
-img {
-    max-width: 100%;
-    display: block;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 5%;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; background-color: var(--bg-dark); }
+body { font-family: var(--font-text); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 600; line-height: 1.2; }
+a { text-decoration: none; color: inherit; transition: var(--transition); }
+img { max-width: 100%; display: block; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
 .padding-y { padding: 6rem 0; }
 .mt-2 { margin-top: 1rem; }
 .mt-4 { margin-top: 3rem; }
@@ -74,59 +40,80 @@ img {
 
 .gold-text-gradient {
     background: linear-gradient(to right, var(--gold-light), var(--gold-primary), var(--gold-dark));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;
 }
 .gold-text { color: var(--gold-primary); }
 
 .ambient-background {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100vh;
-    z-index: 0;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 0;
     background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.08) 0%, rgba(5, 5, 5, 1) 70%),
                 url('https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
-    filter: brightness(0.25) contrast(1.2);
-    pointer-events: none;
+    filter: brightness(0.25) contrast(1.2); pointer-events: none;
 }
 
 /* =========================================================
    HEADER, LOGO & NAV MENU
    ========================================================= */
-.header {
-    position: fixed;
-    top: 0; width: 100%;
-    padding: 1.2rem 0;
-    transition: var(--transition);
-    z-index: 100;
-}
+.header { position: fixed; top: 0; width: 100%; padding: 1.2rem 0; transition: var(--transition); z-index: 100; }
+.header.scrolled { background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--glass-border); padding: 0.6rem 0; }
+.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 5%; display: flex; justify-content: space-between; align-items: center; }
 
-.header.scrolled {
-    background: rgba(5, 5, 5, 0.95);
+/* Menu Nav adaptado para móviles */
+.main-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(5, 5, 5, 0.98);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--glass-border);
-    padding: 0.6rem 0;
+    transform: translateY(-150%);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: -1;
+    pointer-events: none; /* Evitar clicks accidentales cuando esta oculto */
 }
 
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 5%;
+.main-nav.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.main-nav ul {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    padding: 2rem 0;
+    list-style: none;
+    gap: 2rem;
 }
 
-.main-nav {
-    display: none;
+.main-nav a {
+    color: var(--text-main); font-weight: 500; font-size: 1.1rem; text-transform: uppercase;
+    letter-spacing: 2px; position: relative;
 }
 
 @media (min-width: 900px) {
-    .main-nav { display: block; }
-    .main-nav ul { display: flex; list-style: none; gap: 2rem; }
+    .main-nav {
+        position: static;
+        flex-direction: row;
+        background: transparent;
+        border: none;
+        transform: translateY(0);
+        opacity: 1;
+        width: auto;
+        z-index: 1;
+        pointer-events: auto;
+    }
+    .main-nav ul {
+        flex-direction: row;
+        padding: 0;
+        gap: 2rem;
+    }
     .main-nav a {
-        color: var(--text-main); font-weight: 500; font-size: 0.9rem; text-transform: uppercase;
-        letter-spacing: 1px; position: relative;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
     }
     .main-nav a::after {
         content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 1px;
@@ -136,16 +123,42 @@ img {
     .main-nav a:hover::after { width: 100%; }
 }
 
+/* Icono Hamburger Menú */
+.menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--gold-primary);
+    cursor: pointer;
+    z-index: 101;
+    transition: var(--transition);
+}
+
+.menu-toggle:hover {
+    color: var(--gold-light);
+}
+
+@media (min-width: 900px) {
+    .menu-toggle { display: none; }
+}
+
 .logo-container {
-    background-color: #fff;
-    width: 65px; height: 65px; border-radius: 50%;
+    background-color: #fff; width: 65px; height: 65px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     border: 2px solid var(--gold-primary); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-    transition: var(--transition); overflow: hidden; cursor: pointer;
+    transition: var(--transition); overflow: hidden; cursor: pointer; z-index: 102; /* Siempre por encima del nav */
 }
 .logo-container:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(212, 175, 55, 0.8); }
 .main-logo { width: 80%; height: auto; object-fit: contain; mix-blend-mode: multiply; }
 .header.scrolled .logo-container { width: 50px; height: 50px; }
+
+/* Ocultar botón Pill de contacto en celular si estorba con el hamburger (ahora lo dejamos como opcional si cabe, mejor esconder en pantallas super chicas) */
+@media (max-width: 480px) {
+    .btn-pill-animated {
+        display: none !important; /* En móviles pequeños usamos el hamburger */
+    }
+}
 
 /* =========================================================
    BOTONES Y HERO
@@ -156,77 +169,35 @@ img {
     text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; cursor: pointer;
 }
 
-/* El botón ovalado mágico (Pill Animated) */
 .btn-pill-animated {
-    position: relative;
-    padding: 0.7rem 1.8rem;
-    border-radius: 50px;
-    background: transparent;
-    color: var(--gold-light);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    overflow: hidden;
-    z-index: 1;
-    transition: var(--transition);
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.1);
+    position: relative; padding: 0.7rem 1.8rem; border-radius: 50px; background: transparent;
+    color: var(--gold-light); font-weight: 600; text-transform: uppercase; font-size: 0.85rem;
+    letter-spacing: 1px; overflow: hidden; z-index: 1; transition: var(--transition);
+    border: 1px solid rgba(212, 175, 55, 0.2); box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.1);
 }
-
-.btn-pill-animated span {
-    position: relative;
-    z-index: 2;
-}
-
+.btn-pill-animated span { position: relative; z-index: 2; }
 .btn-pill-animated::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    border-radius: 50px;
-    padding: 2px;
+    content: ''; position: absolute; inset: 0; z-index: 1; border-radius: 50px; padding: 2px;
     background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-    background-size: 200% 100%;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    animation: goldBorderFlow 3s linear infinite;
+    background-size: 200% 100%; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; animation: goldBorderFlow 3s linear infinite;
 }
+.btn-pill-animated:hover { background: rgba(212, 175, 55, 0.15); box-shadow: 0 0 25px rgba(212, 175, 55, 0.5); color: #FFF; border-color: var(--gold-primary); }
+@keyframes goldBorderFlow { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-.btn-pill-animated:hover {
-    background: rgba(212, 175, 55, 0.15);
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
-    color: #FFF;
-    border-color: var(--gold-primary);
-}
-
-@keyframes goldBorderFlow {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-}
-
-.btn-gold-solid {
-    background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); color: #fff;
-    border: none; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-}
+.btn-gold-solid { background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); color: #fff; border: none; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
 .btn-gold-solid:hover { background: linear-gradient(135deg, var(--gold-light), var(--gold-primary)); transform: translateY(-3px); color: #000; }
 .btn-outline.gold-outline { border: 1px solid var(--gold-primary); color: var(--gold-primary); background: transparent; }
 .btn-outline.gold-outline:hover { background: rgba(212, 175, 55, 0.1); color: var(--gold-light); border-color: var(--gold-light); }
 .btn-huge { padding: 1.2rem 3rem; font-size: 1.1rem; }
 .pulse-gold { animation: goldPulse 2.5s infinite; }
-@keyframes goldPulse {
-    0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); }
-    70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
-}
+@keyframes goldPulse { 0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
 
 .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px; }
 .hero-content { max-width: 800px; padding: 0 1.5rem; }
 .subtitle-badge {
-    display: inline-block; padding: 0.4rem 1rem; background: rgba(212, 175, 55, 0.1);
-    border: 1px solid var(--gold-primary); color: var(--gold-primary); font-size: 0.8rem;
-    letter-spacing: 3px; text-transform: uppercase; border-radius: 50px; margin-bottom: 2rem;
+    display: inline-block; padding: 0.4rem 1rem; background: rgba(212, 175, 55, 0.1); border: 1px solid var(--gold-primary);
+    color: var(--gold-primary); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; border-radius: 50px; margin-bottom: 2rem;
 }
 .hero h1 { font-size: clamp(2.5rem, 6vw, 5rem); margin-bottom: 1.5rem; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
 .hero-p { font-size: clamp(1rem, 2vw, 1.2rem); margin-bottom: 3rem; font-weight: 300; }
@@ -245,22 +216,19 @@ img {
 }
 
 .glass-card {
-    background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border);
-    padding: 2.5rem 2rem; border-radius: 12px; box-shadow: var(--glass-shadow); text-align: center;
-    position: relative; overflow: hidden;
+    background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); padding: 2.5rem 2rem;
+    border-radius: 12px; box-shadow: var(--glass-shadow); text-align: center; position: relative; overflow: hidden;
 }
 .glass-card::before {
     content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-    background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.1), transparent);
-    transform: skewX(-25deg); transition: 0.5s;
+    background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.1), transparent); transform: skewX(-25deg); transition: 0.5s;
 }
 .glass-card:hover::before { left: 150%; }
 .glass-card:hover { border-color: rgba(212, 175, 55, 0.6); }
 
 .card-icon {
     font-size: 2.5rem; color: var(--gold-primary); margin-bottom: 1.5rem;
-    background: -webkit-linear-gradient(var(--gold-light), var(--gold-dark));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background: -webkit-linear-gradient(var(--gold-light), var(--gold-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 .glass-card h3 { font-size: 1.3rem; margin-bottom: 1rem; color: #FFF; }
 .glass-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
@@ -269,8 +237,11 @@ img {
 /* =========================================================
    INSTAGRAM GALLERY (Con descripciones en Hover)
    ========================================================= */
-.ig-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-@media (min-width: 768px) { .ig-gallery { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+/* Ajuste en Móvil: El grid ahora es de 1 columna (1fr) para que las fotos sean grandes y legibles */
+.ig-gallery { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+@media (min-width: 768px) { .ig-gallery { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
+@media (min-width: 1024px) { .ig-gallery { grid-template-columns: repeat(4, 1fr); } }
+
 .ig-img-wrapper {
     position: relative; border-radius: 12px; overflow: hidden; border: 2px solid var(--glass-border);
     aspect-ratio: 1/1; box-shadow: var(--glass-shadow); background: #000; cursor: pointer;
@@ -280,13 +251,13 @@ img {
 .ig-hover-overlay {
     position: absolute; inset: 0; background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(3px);
     display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition);
-    border-radius: 10px; padding: 1rem;
+    border-radius: 10px; padding: 1.5rem;
 }
 .overlay-content { text-align: center; transform: translateY(20px); transition: var(--transition); }
-.overlay-content i { font-size: 1.8rem; margin-bottom: 0.8rem; }
-.overlay-content h4 { font-family: var(--font-heading); color: var(--gold-light); font-size: 1rem; margin-bottom: 0.5rem; letter-spacing: 1px; }
-.overlay-content p { font-size: 0.8rem; color: var(--text-main); line-height: 1.4; margin-bottom: 0.8rem; }
-.btn-min { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold-primary); border-bottom: 1px solid var(--gold-primary); padding-bottom: 2px; }
+.overlay-content i { font-size: 2rem; margin-bottom: 0.8rem; }
+.overlay-content h4 { font-family: var(--font-heading); color: var(--gold-light); font-size: 1.3rem; margin-bottom: 0.5rem; letter-spacing: 1px; }
+.overlay-content p { font-size: 1rem; color: var(--text-main); line-height: 1.5; margin-bottom: 0.8rem; }
+.btn-min { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold-primary); border-bottom: 1px solid var(--gold-primary); padding-bottom: 2px; }
 
 .ig-img-wrapper:hover img { transform: scale(1.1); }
 .ig-img-wrapper:hover .ig-hover-overlay { opacity: 1; }
@@ -322,8 +293,7 @@ img {
    CTA Glass Container Final
    ========================================================= */
 .cta-glass-container {
-    background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border);
-    padding: 4rem 2rem; border-radius: 15px;
+    background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); padding: 4rem 2rem; border-radius: 15px;
 }
 
 /* =========================================================
@@ -361,5 +331,3 @@ img {
     font-weight: 600; opacity: 0; transition: opacity 0.3s; white-space: nowrap; pointer-events: none;
 }
 .wa-float-vip:hover .wa-tooltip { opacity: 1; }
-.fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s, transform 0.8s; }
-.fade-up.visible { opacity: 1; transform: translateY(0); }
