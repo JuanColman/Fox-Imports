@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Asegurar que el scroll esté habilitado (limpieza de residuos de versiones anteriores)
+    document.body.style.overflow = '';
     
     // 1. Efecto Scroll en Navbar
     const header = document.getElementById("header");
@@ -79,44 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
             });
-        });
-    }
-
-    // 5. Bienvenida Musical y Reproducción de Foco Global
-    const welcomeOverlay = document.getElementById('welcome-overlay');
-    const enterBtn = document.getElementById('enter-btn');
-    const globalAudio = document.getElementById('global-audio-track');
-    
-    if (welcomeOverlay && enterBtn && globalAudio) {
-        // Bloquear scroll de la página mientras el welcome overlay está activo
-        document.body.style.overflow = 'hidden';
-
-        // 1. Iniciar audio al primer contacto con la pantalla de bienvenida
-        // (Los navegadores requieren una interacción previa)
-        const startAudio = () => {
-            if (globalAudio.paused) {
-                globalAudio.volume = 0.15; // Volumen de bienvenida sutil (15%)
-                globalAudio.play().catch(e => console.log("Audio play prevent:", e));
-            }
-        };
-
-        // Escuchar click en cualquier parte del overlay para iniciar música
-        welcomeOverlay.addEventListener('click', startAudio);
-        
-        // Al hacer click en ENTRAR: bajar volumen significativamente y navegar
-        enterBtn.addEventListener('click', () => {
-            // Bajamos el volumen al 5% para que sea casi un susurro durante la lectura
-            globalAudio.volume = 0.05;
-            
-            // Ocultar Overlay y restaurar scroll
-            welcomeOverlay.classList.add('hidden');
-            document.body.style.overflow = '';
-
-            // Llevar al inicio (Hero)
-            const inicioSection = document.getElementById('inicio');
-            if (inicioSection) {
-                inicioSection.scrollIntoView({ behavior: 'smooth' });
-            }
         });
     }
 
