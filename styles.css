@@ -38,11 +38,24 @@ img { max-width: 100%; display: block; }
 .relative-section { position: relative; }
 .z-index-1 { z-index: 1; }
 
+/* Animaciones de Entrada */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .gold-text-gradient {
     background: linear-gradient(to right, var(--gold-light), var(--gold-primary), var(--gold-dark));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;
 }
 .gold-text { color: var(--gold-primary); }
+.gold-outline { border: 1px solid var(--gold-primary); color: var(--gold-primary); }
 
 .ambient-background {
     position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 0;
@@ -74,8 +87,13 @@ img { max-width: 100%; display: block; }
     z-index: 90; /* Detrás del logo y hamburguesa, pero enfrente del contenido */
     transform: translateY(-100%);
     opacity: 0;
-    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.5s;
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.4s;
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 60px; /* Espacio para no chocar con el header */
 }
 
 .main-nav.active {
@@ -90,18 +108,37 @@ img { max-width: 100%; display: block; }
     align-items: center;
     padding: 0;
     list-style: none;
-    gap: 3rem; /* Más espacio para celular */
+    gap: 1.5rem; /* Gap reducido para armonía */
 }
 
 /* Enlaces del menú celular (Premium, Grandes, Estilo Árabe) */
 .main-nav a {
     color: var(--gold-light);
     font-family: var(--font-heading);
-    font-size: 2rem;
+    font-size: 1.3rem; /* Tamaño optimizado */
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     position: relative;
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+    padding: 0.8rem 1rem;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-number {
+    font-size: 0.8rem;
+    color: var(--gold-primary);
+    font-weight: 700;
+    opacity: 0.7;
+    border-bottom: 1px solid var(--gold-primary);
+    padding-bottom: 2px;
+}
+
+@media (min-width: 900px) {
+    .nav-number { display: none; } /* Ocultar números en desktop para minimalismo */
+    .main-nav a { font-size: 0.9rem; padding: 0; }
 }
 
 @media (min-width: 900px) {
@@ -143,17 +180,20 @@ img { max-width: 100%; display: block; }
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     color: var(--gold-primary);
     cursor: pointer;
-    z-index: 101; /* Siempre enfrente */
+    z-index: 101;
     transition: var(--transition);
     background: transparent;
     border: none;
-    padding: 0.5rem; /* Margen táctil */
+    width: 48px; /* Simetría con el logo */
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, 0.3);
 }
 .menu-toggle:focus { outline: none; }
-.menu-toggle:active { transform: scale(0.9); }
+.menu-toggle:active { transform: scale(0.9); background: rgba(212, 175, 55, 0.1); }
 
 @media (min-width: 900px) {
     .menu-toggle { display: none; }
@@ -165,14 +205,18 @@ img { max-width: 100%; display: block; }
 }
 
 .logo-container {
-    background-color: #fff; width: 65px; height: 65px; border-radius: 50%;
+    background-color: #fff; width: 60px; height: 60px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    border: 2px solid var(--gold-primary); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-    transition: var(--transition); overflow: hidden; cursor: pointer; z-index: 102; /* Siempre por encima */
+    border: 2px solid var(--gold-primary); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    transition: var(--transition); overflow: hidden; cursor: pointer; z-index: 102;
 }
 .logo-container:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(212, 175, 55, 0.8); }
 .main-logo { width: 80%; height: auto; object-fit: contain; mix-blend-mode: multiply; }
 .header.scrolled .logo-container { width: 50px; height: 50px; }
+
+@media (max-width: 899px) { /* Afecta a todos los móviles y tablets */
+    .logo-container { width: 48px; height: 48px; }
+}
 
 /* =========================================================
    BOTONES Y HERO
@@ -506,4 +550,85 @@ img { max-width: 100%; display: block; }
     .work-section .btn {
         width: 100%;
     }
+}
+
+/* =========================================================
+   POR QUÉ ELEGIRNOS (WHY US SECTION)
+   ========================================================= */
+.bg-darker { background: rgba(5, 5, 5, 0.95); }
+
+@media (min-width: 1024px) {
+    .grid-3-cols { grid-template-columns: repeat(3, 1fr); }
+}
+
+.urgency-banner {
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.1) 50%, rgba(212, 175, 55, 0.05) 100%);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+    margin-top: 3rem;
+}
+
+.urgency-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--gold-light);
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .urgency-content {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+.pulse-icon {
+    font-size: 1.4rem;
+    color: var(--gold-primary);
+    animation: goldPulse 2s infinite;
+}
+
+.dual-cta-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+@media (max-width: 767px) {
+    .dual-cta-container .btn {
+        width: 100%; /* Botones de ancho completo para mejor ergonomía táctil */
+        max-width: 350px;
+    }
+}
+
+@media (min-width: 768px) {
+    .dual-cta-container {
+        flex-direction: row;
+        gap: 2rem;
+    }
+}
+
+.why-us-section .glass-card {
+    transition: var(--transition);
+    border-bottom: 2px solid transparent;
+}
+
+.why-us-section .glass-card:hover {
+    border-bottom-color: var(--gold-primary);
+    transform: translateY(-5px);
+}
+
+.why-us-section .card-icon {
+    margin-bottom: 1rem;
 }
