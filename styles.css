@@ -411,3 +411,99 @@ img { max-width: 100%; display: block; }
     font-weight: 600; opacity: 0; transition: opacity 0.3s; white-space: nowrap; pointer-events: none;
 }
 .wa-float-vip:hover .wa-tooltip { opacity: 1; }
+
+/* =========================================================
+   CÓMO TRABAJAMOS (WORK SECTION)
+   ========================================================= */
+.work-section { background: rgba(10, 10, 10, 0.5); }
+
+.showroom-feature {
+    border: 2px solid var(--gold-primary);
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.8) 0%, rgba(5, 5, 5, 0.95) 100%);
+    position: relative;
+}
+
+.showroom-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    text-align: left;
+}
+
+@media (min-width: 900px) {
+    .showroom-grid {
+        grid-template-columns: 1.5fr 1fr;
+    }
+}
+
+.badge-mini {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.group-buy-highlight {
+    background: rgba(212, 175, 55, 0.05);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--gold-primary);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.group-buy-highlight i {
+    font-size: 1.5rem;
+}
+
+.showroom-manifesto {
+    padding-left: 2rem;
+    border-left: 1px solid rgba(212, 175, 55, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.manifesto-text {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-style: italic;
+    color: var(--gold-light);
+    line-height: 1.3;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .showroom-feature { padding: 2rem 1.5rem; }
+    .showroom-grid { text-align: center; }
+    .group-buy-highlight { flex-direction: column; text-align: center; }
+    .manifesto-text { font-size: 1.4rem; }
+}
+
+/* Fix for existing cards to ensure consistent height if needed */
+.work-section .glass-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.work-section .glass-card p {
+    flex-grow: 1;
+}
+
+/* Specific button adjustment for work section */
+.work-section .btn {
+    width: fit-content;
+}
+
+@media (max-width: 900px) {
+    .work-section .btn {
+        width: 100%;
+    }
+}
